@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('plainInput')) {
         initBlockCipherPage();
     }
+
+    // About Page Logic
+    if (document.getElementById('about-content')) {
+        initAboutPage();
+    }
 });
 
 /* --- Index Page Functions --- */
@@ -58,7 +63,9 @@ function initIndexPage() {
 
         setTimeout(type, typeSpeed);
     }
-    type();
+    if (textElement) {
+        type();
+    }
 
     // Canvas Background Animation
     const canvas = document.getElementById('canvas-bg');
@@ -490,4 +497,21 @@ function updateVis() {
     }
     html += '</div>';
     container.innerHTML = html;
+}
+
+/* --- About Page Functions --- */
+function initAboutPage() {
+    const nameElement = document.getElementById('typing-name');
+    if (!nameElement) return;
+    const text = "Shohruz Turgunaliev";
+    let index = 0;
+    
+    function typeName() {
+        if (index < text.length) {
+            nameElement.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeName, 100);
+        }
+    }
+    typeName();
 }

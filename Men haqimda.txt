@@ -1,0 +1,70 @@
+Hi, welcome to my Personal page!
+Twitter
+Facebook
+Instagram
+Github
+
+Shohruz Turgunaliev
+Php/Laravel Developer
+
+Learner and Educator - My Journey in the World of Technology
+Hello! I am someone who considers programming a way of life and never tires of sharing knowledge with others. With a passion for both learning and teaching, I strive to bridge the gap between complex technologies and practical applications.
+
+Age
+27
+Email
+tshohruz@gmail.com
+Phone
++998 88 814-22-33
+Address
+Tashkent, Bunyodkor 8.
+Skills
+Backend Development:
+- Proficient in PHP with solid object-oriented programming (OOP) principles
+
+- Hands-on experience developing web applications using Laravel Framework
+
+- Strong understanding of Laravel ecosystem: Eloquent ORM, routing, middleware, authentication, and service containers
+
+- Experience building and consuming RESTful APIs
+
+Database Management:
+- Proficient in MySQL and PostgreSQL
+
+- Strong knowledge of database design, normalization, and optimization
+
+- Experience with Laravel migrations, seeders, and query optimization
+
+Frontend & Integration:
+- Working knowledge of HTML, CSS, and JavaScript
+
+- Ability to integrate backend services with frontend applications
+
+- Experience collaborating with frontend developers
+
+Development Tools:
+- Version control with Git and collaborative workflows (branching, pull requests, code reviews)
+
+- Understanding of modern development practices and workflows
+
+Personal Qualities:
+- Passionate about learning new technologies and best practices
+- Self-motivated with strong sense of responsibility
+- Excellent team player with willingness to share knowledge and learn from others
+- Detail-oriented and committed to writing clean, maintainable code
+Work Experience
+Senior Lecturer at Cyber University
+Sep 2025 - Present
+Teaching programming and modern development technologies, mentoring students, and continuously enhancing both pedagogical skills and technical expertise.
+Assistant Teacher at TUIT
+Sep 2022 - Jun 2025
+Taught programming fundamentals, assisted in curriculum development, and developed strong communication and knowledge-sharing skills through educational practice.
+Education
+Masters in Computer Engineering from TUIT
+2021 - 2023
+Bachelor of Software Engineering from TUIT
+2017 - 2021
+Languages
+Russian intermediate
+English intermediate
+I can easily understand documentation and terms of reference written in both languages
