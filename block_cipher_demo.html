@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blok Shifrlash Rejimlari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/main.css">
+</head>
+<body class="block-cipher">
+
+    <nav>
+        <a href="index.html" class="nav-logo">CryptoLab</a>
+        <a href="index.html">Asosiy</a>
+        <a href="topics.html">C++ Dasturlash</a>
+        <a href="topics.html">Web Texnologiyalar</a>
+        <a href="topics.html">Frontend</a>
+        <a href="topics.html">Backend</a>
+    </nav>
+
+    <h1>Blok Shifrlash Rejimlari</h1>
+    
+    <div class="container">
+        
+        <div class="card">
+            <div class="input-section">
+                <label>Ma'lumot (16 belgi):</label>
+                <input type="text" id="plainInput" value="SALOM DUNYO! TEST" maxlength="32" oninput="updateVis()">
+                <div style="display: flex; align-items: center; gap: 10px; margin-left: 10px;">
+                    <input type="checkbox" id="animToggle" onchange="toggleAnimation()">
+                    <label for="animToggle" style="cursor: pointer; user-select: none; font-size: 0.9rem;">Animatsiya</label>
+                </div>
+            </div>
+
+            <div class="mode-buttons">
+                <button class="mode-btn active" onclick="setMode('ECB')">ECB (Xavfli)</button>
+                <button class="mode-btn" onclick="setMode('CBC')">CBC (Zanjir)</button>
+                <button class="mode-btn" onclick="setMode('CTR')">CTR (Hisoblagich)</button>
+            </div>
+
+            <div class="visualization-area" id="visArea">
+                <!-- JS generates blocks here -->
+            </div>
+
+            <div class="info-box" id="infoBox">
+                <!-- Info text -->
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Tushunchalar</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4 style="color: var(--warning);">IV (Initialization Vector)</h4>
+                    <p style="font-size: 0.9rem; color: #cbd5e1;">
+                        Tasodifiy qiymat. U bir xil ma'lumot shifrlanganda har safar har xil natija chiqishini ta'minlaydi. IV maxfiy bo'lishi shart emas, lekin har bir xabar uchun noyob bo'lishi kerak.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary);">Bloklarga bo'lish</h4>
+                    <p style="font-size: 0.9rem; color: #cbd5e1;">
+                        AES kabi algoritmlar ma'lumotni qismlarga (bloklarga, masalan 128 bit) bo'lib ishlaydi. Agar oxirgi blok to'lmasa, "Padding" (to'ldiruvchi) qo'shiladi.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>
