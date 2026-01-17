@@ -28,6 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('about-content')) {
         initAboutPage();
     }
+
+    // Network Simulation Logic
+    if (document.querySelector('.tarmoq')) {
+        initTarmoqPage();
+    }
 });
 
 /* --- Index Page Functions --- */
@@ -514,4 +519,66 @@ function initAboutPage() {
         }
     }
     typeName();
+}
+
+/* --- Network Simulation Page Functions --- */
+function initTarmoqPage() {
+    const deviceData = {
+        cpe: {
+            title: "TP-Link CPE610",
+            icon: "bi-router-fill",
+            desc: "5GHz 300Mbps 23dBi tashqi CPE. Uzoq masofali (20km+) simsiz aloqa uchun mo'ljallangan. Yomg'ir va qorga chidamli korpus.",
+            stats: "Status: Online | Signal: -62dBm | Link: 100% | Distance: 5.2km"
+        },
+        cpe_interior: {
+            title: "TP-Link CPE610 (Client)",
+            icon: "bi-router-fill",
+            desc: "Qabul qiluvchi stansiya (Station Mode). Tashqi hududdan kelayotgan signalni qabul qilib, kabel orqali ichki tarmoqqa uzatadi.",
+            stats: "Mode: Client | Signal: -58dBm | Link: 100%"
+        },
+        poe: {
+            title: "Passive PoE Injector",
+            icon: "bi-lightning-fill",
+            desc: "Ethernet kabeli orqali ma'lumot va 24V elektr tokini bir vaqtning o'zida uzatadi. CPE ni ortiqcha kabellarsiz quvvatlaydi.",
+            stats: "Output: 24V DC | Input: 220V AC | Status: Stable"
+        },
+        switch: {
+            title: "TP-Link TL-SG108",
+            icon: "bi-hdd-network",
+            desc: "Gigabit Switch. Tarmoqni kengaytirish va bir nechta qurilmalarni ulash imkonini beradi. Deco va boshqa qurilmalarni bog'laydi.",
+            stats: "Speed: 1000Mbps | Ports: 8 | Load: 15%"
+        },
+        deco: {
+            title: "TP-Link Deco X50",
+            icon: "bi-router",
+            desc: "AI-Driven Mesh Wi-Fi 6 tizimi. Uyingizning har bir burchagida yuqori tezlikdagi internetni ta'minlaydi. O'lik zonalarni yo'qotadi.",
+            stats: "Clients: 5 | Coverage: Excellent | Band: Dual-Band (2.4/5GHz)"
+        },
+        laptop: {
+            title: "Ofis Noutbuki",
+            icon: "bi-laptop",
+            desc: "Wi-Fi 6 moduli orqali tarmoqqa ulangan va yuqori tezlikda videokonferensiya qilmoqda.",
+            stats: "IP: 192.168.0.101 | Speed: 450Mbps | Protocol: 802.11ax"
+        },
+        phone: {
+            title: "Smartfon (iPhone 15)",
+            icon: "bi-phone",
+            desc: "Mesh rouming texnologiyasi tufayli xonalararo o'tganda ham uzilishsiz aloqa. Avtomatik eng yaqin nuqtaga ulanadi.",
+            stats: "IP: 192.168.0.102 | Signal: Strong | Band: 5GHz"
+        }
+    };
+
+    window.showDetail = function(id) {
+        const data = deviceData[id];
+        if (!data) return;
+        document.getElementById('detailTitle').innerText = data.title;
+        document.getElementById('detailText').innerText = data.desc;
+        document.getElementById('detailStats').innerText = data.stats;
+        document.getElementById('detailIcon').innerHTML = `<i class="bi ${data.icon}"></i>`;
+        document.getElementById('detailPanel').classList.add('visible');
+    };
+
+    window.hideDetail = function() {
+        document.getElementById('detailPanel').classList.remove('visible');
+    };
 }
