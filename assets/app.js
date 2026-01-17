@@ -581,4 +581,82 @@ function initTarmoqPage() {
     window.hideDetail = function() {
         document.getElementById('detailPanel').classList.remove('visible');
     };
+
+    // Draw Cables (Realistic Connections)
+    function drawCables() {
+        const svg = document.getElementById('cable-overlay');
+        if (!svg) return;
+        svg.innerHTML = ''; // Clear existing
+        
+        const container = document.querySelector('.zone-interior');
+        if (!container) return;
+        const contRect = container.getBoundingClientRect();
+
+        function getPointAndDir(el, side, offsetPercent = 50) {
+            if (!el) return null;
+            const r = el.getBoundingClientRect();
+            const x = r.left - contRect.left;
+            const y = r.top - contRect.top;
+            const w = r.width;
+            const h = r.height;
+            
+            let p = { x: 0, y: 0, dir: {x:0, y:0} };
+
+            switch(side) {
+                case 'top': p.x = x + w * (offsetPercent/100); p.y = y; p.dir = {x: 0, y: -1}; break;
+                case 'bottom': p.x = x + w * (offsetPercent/100); p.y = y + h; p.dir = {x: 0, y: 1}; break;
+                case 'left': p.x = x; p.y = y + h * (offsetPercent/100); p.dir = {x: -1, y: 0}; break;
+                case 'right': p.x = x + w; p.y = y + h * (offsetPercent/100); p.dir = {x: 1, y: 0}; break;
+            }
+            return p;
+        }
+
+        function drawSmartCable(el1, side1, el2, side2, color, offset1=50, offset2=50) {
+            const p1 = getPointAndDir(el1, side1, offset1);
+            const p2 = getPointAndDir(el2, side2, offset2);
+            if (!p1 || !p2) return;
+
+            const dist = Math.sqrt(Math.pow(p2.x-p1.x, 2) + Math.pow(p2.y-p1.y, 2));
+            const tension = Math.min(dist * 0.5, 150);
+
+            const cp1x = p1.x + p1.dir.x * tension;
+            const cp1y = p1.y + p1.dir.y * tension;
+            const cp2x = p2.x + p2.dir.x * tension;
+            const cp2y = p2.y + p2.dir.y * tension;
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', `M ${p1.x} ${p1.y} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`);
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke', color);
+            path.setAttribute('stroke-width', '2');
+            path.setAttribute('stroke-linecap', 'round');
+            path.style.filter = 'drop-shadow(0 1px 2px rgba(0,0,0,0.5))';
+            svg.appendChild(path);
+        }
+
+        const cpe = document.getElementById('cpe_interior');
+        const poe = document.getElementById('poe');
+        const sw = document.getElementById('switch');
+        const r1 = document.getElementById('router1');
+        const r2 = document.getElementById('router2');
+        const deco = document.getElementById('deco1');
+
+        // 1. CPE -> PoE (Red, WAN)
+        drawSmartCable(cpe, 'bottom', poe, 'left', '#ef4444', 50, 50);
+
+        // 2. PoE -> Switch (Red, Uplink)
+        drawSmartCable(poe, 'right', sw, 'right', '#ef4444', 50, 20);
+
+        // 3. Switch -> Router 1 (Blue, LAN)
+        drawSmartCable(sw, 'left', r1, 'left', '#3b82f6', 20, 50);
+
+        // 4. Switch -> Router 2 (Blue, LAN)
+        drawSmartCable(sw, 'left', r2, 'left', '#3b82f6', 50, 50);
+
+        // 5. Switch -> Deco (Blue, LAN)
+        drawSmartCable(sw, 'bottom', deco, 'right', '#3b82f6', 80, 50);
+    }
+
+    window.addEventListener('resize', drawCables);
+    setTimeout(drawCables, 100);
 }

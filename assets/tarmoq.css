@@ -1,5 +1,5 @@
 body.tarmoq {
-    padding: 100px 0;
+    padding: 10vmin 0;
     /* 100px vertical margin requested */
     margin: 0;
     overflow: hidden;
@@ -15,12 +15,12 @@ body.tarmoq {
     display: grid;
     grid-template-columns: 1fr 2.5fr;
     grid-template-rows: 1fr;
-    gap: 30px;
+    gap: 3vmin;
     /* Space between cards */
     width: 100%;
     flex: 1;
     height: auto;
-    padding: 0 50px;
+    padding: 0 5vmin;
     /* 50px horizontal margin for edge cards */
     box-sizing: border-box;
 }
@@ -29,9 +29,9 @@ body.tarmoq {
     position: relative;
     background: rgba(30, 41, 59, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
+    border-radius: 2vmin;
     /* Card rounded corners */
-    padding: 40px;
+    padding: 4vmin;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,17 +42,17 @@ body.tarmoq {
 
 .zone-label {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 1rem;
+    top: 2vmin;
+    left: 2vmin;
+    font-size: 1.5vmin;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: rgba(255, 255, 255, 0.5);
     font-weight: 800;
     pointer-events: none;
     background: rgba(0, 0, 0, 0.3);
-    padding: 5px 15px;
-    border-radius: 8px;
+    padding: 0.5vmin 1.5vmin;
+    border-radius: 1vmin;
     z-index: 5;
 }
 
@@ -60,23 +60,23 @@ body.tarmoq {
 .zone-exterior {
     background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
     justify-content: flex-start;
-    padding-top: 100px;
+    padding-top: 10vmin;
 }
 
 /* 2. Rack Zone (Middle) */
 .zone-rack {
     background: #1e293b;
     justify-content: flex-end;
-    padding-top: 80px;
-    gap: 50px;
+    padding-top: 8vmin;
+    gap: 5vmin;
     background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255, 255, 255, 0.03) 40px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .zone-exterior .zone-rack {
     position: absolute;
-    bottom: 30px;
-    left: 30px;
+    bottom: 3vmin;
+    left: 3vmin;
     transform: scale(0.6);
     transform-origin: bottom left;
     z-index: 20;
@@ -87,7 +87,7 @@ body.tarmoq {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.6);
+    transform: translate(-50%, -50%) scale(0.85);
     transform-origin: center;
     z-index: 20;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
@@ -102,15 +102,15 @@ body.tarmoq {
 
 /* Device Nodes */
 .device {
-    width: 100px;
-    height: 100px;
+    width: 7vmin;
+    height: 7vmin;
     background: var(--card-bg);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
+    border: 0.3vmin solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5vmin;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 3vmin;
     color: var(--text);
     position: relative;
     cursor: pointer;
@@ -127,12 +127,12 @@ body.tarmoq {
 .device.active::after {
     content: '';
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 1vmin;
+    height: 1vmin;
     background: var(--success);
     border-radius: 50%;
-    top: 8px;
-    right: 8px;
+    top: 0.8vmin;
+    right: 0.8vmin;
     box-shadow: 0 0 8px var(--success);
     animation: blink 1s infinite;
 }
@@ -142,18 +142,18 @@ body.tarmoq {
     border-color: var(--primary);
     color: var(--primary);
     position: absolute;
-    top: 40px;
-    right: 40px;
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+    top: 15%;
+    right: 10%;
+    width: 5vmin;
+    height: 5vmin;
+    font-size: 2vmin;
     background: rgba(59, 130, 246, 0.15);
 }
 
 #cpe_interior {
     right: auto;
-    left: 60px;
-    top: 60px;
+    left: 5%;
+    top: 15%;
     transform: scaleX(-1);
 }
 
@@ -162,21 +162,21 @@ body.tarmoq {
 }
 
 .dev-rack-unit {
-    width: 300px;
-    height: 70px;
-    font-size: 1.5rem;
+    width: 25vmin;
+    height: 6vmin;
+    font-size: 1.8vmin;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 30px;
-    border-radius: 8px;
+    padding: 0 2vmin;
+    border-radius: 0.8vmin;
     background: #1e293b;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .dev-deco {
-    width: 90px;
-    height: 90px;
-    font-size: 2.5rem;
+    width: 8vmin;
+    height: 8vmin;
+    font-size: 3.5vmin;
     border-radius: 50%;
     border-color: var(--success);
     color: var(--success);
@@ -187,26 +187,26 @@ body.tarmoq {
 
 #deco1 {
     top: auto;
-    bottom: 40px;
-    left: 40px;
+    bottom: 10%;
+    left: 10%;
 }
 
 #deco2 {
-    top: 40px;
-    right: 40px;
+    top: 10%;
+    right: 10%;
     left: auto;
     transform: none;
 }
 
 #deco3 {
-    bottom: 40px;
-    right: 40px;
+    bottom: 10%;
+    right: 10%;
 }
 
 .user-device {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
+    width: 4vmin;
+    height: 4vmin;
+    font-size: 1.8vmin;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.08);
     position: absolute;
@@ -218,31 +218,6 @@ body.tarmoq {
 
 .user-laptop {
     color: var(--warning);
-}
-
-#laptop1 {
-    bottom: 120px;
-    left: 50px;
-}
-
-#laptop2 {
-    top: 120px;
-    right: 50px;
-}
-
-#phone1 {
-    bottom: 50px;
-    right: 150px;
-}
-
-#phone2 {
-    top: 50px;
-    left: 200px;
-}
-
-#phone3 {
-    top: 50%;
-    right: 100px;
 }
 
 .coverage-zone {
@@ -283,21 +258,21 @@ body.tarmoq {
 /* Detail Panel */
 .detail-panel {
     position: fixed;
-    bottom: 40px;
+    bottom: 5vmin;
     left: 50%;
     transform: translateX(-50%) translateY(150%);
     width: 80%;
     max-width: 800px;
     background: rgba(15, 23, 42, 0.95);
     border: 1px solid var(--primary);
-    border-radius: 20px;
-    padding: 30px;
+    border-radius: 2vmin;
+    padding: 3vmin;
     z-index: 100;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     backdrop-filter: blur(20px);
     box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.6);
     display: flex;
-    gap: 30px;
+    gap: 3vmin;
     align-items: center;
 }
 
@@ -306,32 +281,32 @@ body.tarmoq {
 }
 
 .detail-icon {
-    font-size: 4rem;
+    font-size: 6vmin;
     color: var(--primary);
-    min-width: 80px;
+    min-width: 8vmin;
     text-align: center;
 }
 
 .detail-content h3 {
     margin: 0 0 10px 0;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 2.5vmin;
 }
 
 .detail-content p {
     margin: 0;
     color: #cbd5e1;
-    font-size: 1.1rem;
+    font-size: 1.8vmin;
     line-height: 1.6;
 }
 
 .close-detail {
     position: absolute;
-    top: 20px;
-    right: 25px;
+    top: 2vmin;
+    right: 2.5vmin;
     cursor: pointer;
     color: #94a3b8;
-    font-size: 1.5rem;
+    font-size: 2.5vmin;
 }
 
 .mode-btn {
@@ -399,15 +374,15 @@ body.tarmoq {
 }
 
 .dev-cpe .device-label {
-    bottom: -30px;
-    font-size: 1rem;
-    width: 150px;
+    bottom: -3vmin;
+    font-size: 1.8vmin;
+    width: 15vmin;
 }
 
 .dev-deco .device-label {
-    bottom: -30px;
-    font-size: 0.9rem;
-    width: 120px;
+    bottom: -3vmin;
+    font-size: 1.5vmin;
+    width: 12vmin;
 }
 
 #poe i, #poe_ext i { color: var(--warning); }
@@ -415,7 +390,44 @@ body.tarmoq {
 
 #detailStats {
     margin-top: 15px;
-    font-size: 1rem;
+    font-size: 1.5vmin;
     color: var(--primary);
     font-family: 'JetBrains Mono', monospace;
+}
+
+/* Signal Broadcast Animation */
+.signal-broadcast {
+    position: absolute;
+    top: -4vmin;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6vmin;
+    height: 3vmin;
+    overflow: hidden;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.signal-broadcast span {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 0.4vmin solid var(--primary);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0;
+    opacity: 0;
+    box-sizing: border-box;
+}
+
+.signal-broadcast span:nth-child(1) { width: 1.5vmin; height: 0.75vmin; animation: signal-emit 1.5s infinite 0s; }
+.signal-broadcast span:nth-child(2) { width: 3vmin; height: 1.5vmin; animation: signal-emit 1.5s infinite 0.3s; }
+.signal-broadcast span:nth-child(3) { width: 4.5vmin; height: 2.25vmin; animation: signal-emit 1.5s infinite 0.6s; }
+
+@keyframes signal-emit {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
 }
