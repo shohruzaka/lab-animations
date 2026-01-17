@@ -98,6 +98,7 @@ body.tarmoq {
     background: radial-gradient(circle at center, #1e293b, #0f172a);
     justify-content: center;
     position: relative;
+    overflow: visible;
 }
 
 /* Device Nodes */
@@ -243,8 +244,15 @@ body.tarmoq {
     0% {
         width: 90px;
         height: 90px;
-        opacity: 0.6;
+        opacity: 0.8;
         border-width: 5px;
+        border-color: var(--success);
+        background-color: rgba(16, 185, 129, 0.15);
+    }
+
+    50% {
+        border-color: var(--warning);
+        background-color: rgba(245, 158, 11, 0.05);
     }
 
     100% {
@@ -252,6 +260,8 @@ body.tarmoq {
         height: 800px;
         opacity: 0;
         border-width: 0px;
+        border-color: var(--weak);
+        background-color: rgba(239, 68, 68, 0);
     }
 }
 
@@ -310,22 +320,25 @@ body.tarmoq {
 }
 
 .mode-btn {
-    padding: 10px 20px;
-    background: rgba(16, 185, 129, 0.2);
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    background: rgba(16, 185, 129, 0.1);
     border: 1px solid var(--success);
     color: var(--success);
-    border-radius: 8px;
+    border-radius: 20px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
     font-family: inherit;
+    transition: all 0.3s ease;
 }
 
 .mode-btn:hover {
-    background: rgba(16, 185, 129, 0.4);
+    background: rgba(16, 185, 129, 0.25);
     box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+    transform: translateY(-1px);
 }
 
 @media (max-width: 1000px) {
@@ -430,4 +443,66 @@ body.tarmoq {
     0% { opacity: 0; }
     50% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+.dev-cpe .signal-broadcast {
+    top: 50%;
+    left: auto;
+    right: -4vmin;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+/* Packet Animation */
+.packet-dot {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+    pointer-events: none;
+}
+
+/* Speedtest Animation Styles */
+.speedtest-area {
+    margin-top: 2vmin;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5vmin;
+    border-radius: 1vmin;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.speed-label {
+    font-size: 1.2vmin;
+    color: #94a3b8;
+    margin-bottom: 1vmin;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 1vmin;
+}
+
+.speed-gauge {
+    height: 1vmin;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5vmin;
+    overflow: hidden;
+    margin-bottom: 1vmin;
+}
+
+.speed-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--success));
+    box-shadow: 0 0 10px var(--success);
+    transition: width 0.05s linear;
+}
+
+.speed-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.5vmin;
+    color: var(--success);
+    font-weight: bold;
+    text-align: right;
+}
+
+.speed-value small {
+    font-size: 1.2vmin;
+    color: #cbd5e1;
 }

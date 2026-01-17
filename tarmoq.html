@@ -14,7 +14,7 @@
 
 <body class="tarmoq">
     <nav>
-        <a href="index.html" class="nav-logo">CryptoLab</a>
+        <a href="index.html" class="nav-logo"><i class="bi bi-shield-lock"></i> CryptoLab</a>
         <a href="index.html">Asosiy</a>
         <a href="topics.html">Mavzular</a>
         <a href="#" class="active">Tarmoq</a>
@@ -90,40 +90,40 @@
             </div>
 
             <!-- Laptops -->
-            <div class="device user-device user-laptop active" id="laptop1" style="top: 35%; left: 15%;" onclick="showDetail('laptop')">
+            <div class="device user-device user-laptop active" id="laptop1" style="top: 35%; left: 15%;" onclick="showDetail(this.id)">
                 <i class="bi bi-laptop"></i>
             </div>
 
-            <div class="device user-device user-laptop active" id="laptop2" style="top: 15%; left: 65%;" onclick="showDetail('laptop')">
+            <div class="device user-device user-laptop active" id="laptop2" style="top: 15%; left: 65%;" onclick="showDetail(this.id)">
                 <i class="bi bi-laptop"></i>
             </div>
 
-            <div class="device user-device user-laptop active" id="laptop3" style="top: 65%; left: 25%;" onclick="showDetail('laptop')">
+            <div class="device user-device user-laptop active" id="laptop3" style="top: 65%; left: 25%;" onclick="showDetail(this.id)">
                 <i class="bi bi-laptop"></i>
             </div>
 
-            <div class="device user-device user-laptop active" id="laptop4" style="top: 80%; left: 75%;" onclick="showDetail('laptop')">
+            <div class="device user-device user-laptop active" id="laptop4" style="top: 80%; left: 75%;" onclick="showDetail(this.id)">
                 <i class="bi bi-laptop"></i>
             </div>
 
             <!-- Phones -->
-            <div class="device user-device user-phone active" id="phone1" style="top: 45%; left: 8%;" onclick="showDetail('phone')">
+            <div class="device user-device user-phone active" id="phone1" style="top: 45%; left: 8%;" onclick="showDetail(this.id)">
                 <i class="bi bi-phone"></i>
             </div>
 
-            <div class="device user-device user-phone active" id="phone2" style="top: 35%; left: 85%;" onclick="showDetail('phone')">
+            <div class="device user-device user-phone active" id="phone2" style="top: 35%; left: 85%;" onclick="showDetail(this.id)">
                 <i class="bi bi-phone"></i>
             </div>
 
-            <div class="device user-device user-phone active" id="phone3" style="top: 85%; left: 55%;" onclick="showDetail('phone')">
+            <div class="device user-device user-phone active" id="phone3" style="top: 85%; left: 55%;" onclick="showDetail(this.id)">
                 <i class="bi bi-phone"></i>
             </div>
 
-            <div class="device user-device user-phone active" id="phone4" style="top: 55%; left: 50%;" onclick="showDetail('phone')">
+            <div class="device user-device user-phone active" id="phone4" style="top: 55%; left: 50%;" onclick="showDetail(this.id)">
                 <i class="bi bi-phone"></i>
             </div>
 
-            <div class="device user-device user-phone active" id="phone6" style="top: 70%; left: 20%;" onclick="showDetail('phone')">
+            <div class="device user-device user-phone active" id="phone6" style="top: 70%; left: 20%;" onclick="showDetail(this.id)">
                 <i class="bi bi-phone"></i>
             </div>
 
@@ -131,7 +131,7 @@
             <div class="zone zone-rack">
                 <span class="zone-label">Server Xonasi</span>
 
-                <div class="device dev-rack-unit active" id="router1" onclick="showDetail('deco')">
+                <div class="device dev-rack-unit active" id="router1" onclick="showDetail('router')">
                     <div class="signal-broadcast">
                         <span></span><span></span><span></span>
                     </div>
@@ -139,7 +139,7 @@
                     <span>Wi-Fi Router 1</span>
                 </div>
 
-                <div class="device dev-rack-unit active" id="router2" onclick="showDetail('deco')">
+                <div class="device dev-rack-unit active" id="router2" onclick="showDetail('router')">
                     <div class="signal-broadcast">
                         <span></span><span></span><span></span>
                     </div>
@@ -167,8 +167,16 @@
         <div class="detail-icon" id="detailIcon"><i class="bi bi-router"></i></div>
         <div class="detail-content">
             <h3 id="detailTitle">Device Name</h3>
-            <p id="detailText">Device description goes here.</p>
+            <div id="detailText">Device description goes here.</div>
             <div id="detailStats"></div>
+            
+            <div id="speedtestArea" class="speedtest-area" style="display: none;">
+                <div class="speed-label"><i class="bi bi-speedometer2"></i> Speedtest Simulation</div>
+                <div class="speed-gauge">
+                    <div class="speed-bar" id="speedBar"></div>
+                </div>
+                <div class="speed-value"><span id="speedValue">0.0</span> <small>Mbps</small></div>
+            </div>
         </div>
     </aside>
 

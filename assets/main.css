@@ -78,12 +78,28 @@ nav a:hover, nav a.active {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe;
     font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
 }
 
 .nav-logo:hover {
-    text-shadow: 0 0 15px #00f2fe, 0 0 30px #00f2fe, 0 0 45px #00f2fe;
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    transform: translateY(-50%) scale(1.02);
+}
+
+.nav-logo i {
+    color: var(--primary);
+    font-size: 1.2em;
+    filter: drop-shadow(0 0 5px var(--primary));
 }
 
 @media (max-width: 768px) {
@@ -319,6 +335,19 @@ body.home .card p {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
+    grid-column: 1 / -1;
+}
+
+body.password-hash .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    body.password-hash .container {
+        grid-template-columns: 1fr;
+    }
 }
 
 input[type="text"] {
@@ -341,13 +370,11 @@ input[type="text"]:focus {
 
 .algo-card {
     background: var(--card-bg);
-    padding: 20px;
+    padding: 0;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 20px;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     transition: transform 0.2s;
 }
 
@@ -356,10 +383,20 @@ input[type="text"]:focus {
     background: rgba(30, 41, 59, 0.9);
 }
 
-.algo-info {
-    text-align: right;
-    border-right: 2px solid rgba(255,255,255,0.1);
-    padding-right: 20px;
+.algo-header {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.algo-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .algo-name {
@@ -414,11 +451,6 @@ input[type="text"]:focus {
 
 .vstrong .algo-status { background: rgba(59, 130, 246, 0.2); color: var(--vstrong); }
 .vstrong .fill { background: var(--vstrong); width: 100%; }
-
-@media (max-width: 600px) {
-    .algo-card { grid-template-columns: 1fr; text-align: left; }
-    .algo-info { text-align: left; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; padding-right: 0; }
-}
 
 /* HTTPS Demo Page */
 .subtitle {
@@ -771,3 +803,47 @@ input[type="checkbox"] {
 
 .danger-text { color: var(--weak); font-weight: bold; }
 .safe-text { color: var(--success); font-weight: bold; }
+
+.copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+}
+
+/* Password Input Strength Meter */
+.password-strength-container {
+    margin-top: 15px;
+    text-align: left;
+    display: none;
+}
+
+.strength-meter-bar {
+    height: 6px;
+    background: #334155;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+#strengthBar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s, background-color 0.3s;
+}
