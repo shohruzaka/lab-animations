@@ -78,6 +78,47 @@ if (typeof window !== 'undefined') {
         }, 1000 + tpl.tokens.length * 200);
     };
 
+    window.phase2Parser = function(tokenEls, tpl, target) {
+        const lexerBox = document.getElementById('stage-lexer');
+        const parserBox = document.getElementById('stage-parser');
+        
+        // Move tokens to Parser box
+        tokenEls.forEach(el => moveElementTo(el, parserBox));
+        
+        setTimeout(() => {
+            // Remove tokens, create AST node representations
+            tokenEls.forEach(el => {
+                el.style.opacity = '0';
+                setTimeout(() => el.remove(), 500);
+            });
+            
+            const rootEl = createAnimElement('Assign(x)', 'anim-ast-node', parserBox);
+            const opEl = createAnimElement('Add(+)', 'anim-ast-node', parserBox);
+            const lEl = createAnimElement('Num(5)', 'anim-ast-node', parserBox);
+            const rEl = createAnimElement('Num(3)', 'anim-ast-node', parserBox);
+            
+            // Form tree visually in Parser
+            // Center-top
+            moveElementTo(rootEl, parserBox, 0, -40);
+            // Below root
+            setTimeout(() => moveElementTo(opEl, parserBox, 0, 0), 300);
+            // Bottom branches
+            setTimeout(() => {
+                moveElementTo(lEl, parserBox, -40, 40);
+                moveElementTo(rEl, parserBox, 40, 40);
+            }, 600);
+            
+            const astEls = [rootEl, opEl, lEl, rEl];
+            
+            setTimeout(() => {
+                if (typeof phase3Target === 'function') {
+                    phase3Target(astEls, tpl, target);
+                }
+            }, 2000);
+            
+        }, 1200);
+    };
+
     window.showDetails = function(type) {
         const tplName = document.getElementById('templateSelect').value;
         const currentTemplate = templates[tplName];
