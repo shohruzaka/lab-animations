@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encapsulation - OOP Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/main.css">
+    <link rel="stylesheet" href="assets/encapsulation.css">
+</head>
+<body class="encapsulation-page">
+
+    <nav>
+        <a href="index.html" class="nav-logo"><i class="bi bi-shield-lock"></i> CryptoLab</a>
+        <a href="index.html">Asosiy</a>
+        <a href="topics.html">Mavzular</a>
+        <a href="#" class="active">Encapsulation</a>
+    </nav>
+
+    <h1>Encapsulation (OOP)</h1>
+    <p class="subtitle">Ma'lumotlarni himoyalash va boshqariladigan kirish</p>
+
+    <div class="container">
+        <div class="stage-container">
+            <!-- External Scope -->
+            <div class="scope-box external">
+                <h3><i class="bi bi-code-square"></i> Tashqi Kod (Main)</h3>
+                <div class="controls-group">
+                    <button id="btn-direct" class="control-btn danger">
+                        <i class="bi bi-arrow-right"></i> Direct Access<br>
+                        <small>person.age = 25</small>
+                    </button>
+                    <button id="btn-setter-valid" class="control-btn success">
+                        <i class="bi bi-check-lg"></i> Public Method<br>
+                        <small>person.setAge(25)</small>
+                    </button>
+                    <button id="btn-setter-invalid" class="control-btn warning">
+                        <i class="bi bi-exclamation-triangle"></i> Invalid Value<br>
+                        <small>person.setAge(-5)</small>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Class Scope -->
+            <div class="class-wrapper" id="class-person">
+                <div class="class-label">Class: Person</div>
+                <div class="shield" id="shield"></div>
+                
+                <div class="class-member private" id="member-age">
+                    <i class="bi bi-lock-fill lock-icon" id="lock"></i>
+                    <span class="keyword">private</span> int age = <span id="age-val">0</span>;
+                </div>
+
+                <div class="class-member public" id="method-set">
+                    <span class="keyword">public</span> void setAge(val) { ... }
+                </div>
+            </div>
+        </div>
+
+        <div class="log-box" id="encap-log">Simulyatsiyani boshlash uchun tugmalardan birini bosing.</div>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>

