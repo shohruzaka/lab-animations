@@ -17,31 +17,70 @@ function getTemplate(name) {
     return templates[name];
 }
 
-let currentTemplate = null;
-
 if (typeof window !== 'undefined') {
-    window.startPipeline = function(name) {
-        currentTemplate = templates[name];
-        if (!currentTemplate) return;
+    // Replace old animation logic
+    const animLayer = document.getElementById('animationLayer');
 
-        // Reset styles
-        document.querySelectorAll('.block').forEach(b => b.style.opacity = '0.5');
+    function createAnimElement(text, className, startEl) {
+        const el = document.createElement('div');
+        el.className = className;
+        el.innerText = text;
         
-        // Animation sequence
-        const sequence = ['sourceBlock', 'lexerBlock', 'parserBlock', 'interpreterBlock', 'compilerBlock'];
-        sequence.forEach((id, i) => {
+        const rect = startEl.getBoundingClientRect();
+        const parentRect = document.getElementById('animationLayer').parentElement.getBoundingClientRect();
+        
+        // Set initial position center of startEl
+        el.style.left = (rect.left - parentRect.left + rect.width/2 - 20) + 'px';
+        el.style.top = (rect.top - parentRect.top + rect.height/2 - 10) + 'px';
+        
+        document.getElementById('animationLayer').appendChild(el);
+        return el;
+    }
+
+    function moveElementTo(el, targetEl, offsetX = 0, offsetY = 0) {
+        const rect = targetEl.getBoundingClientRect();
+        const parentRect = document.getElementById('animationLayer').parentElement.getBoundingClientRect();
+        el.style.left = (rect.left - parentRect.left + rect.width/2 + offsetX) + 'px';
+        el.style.top = (rect.top - parentRect.top + rect.height/2 + offsetY) + 'px';
+    }
+
+    window.startPipeline = async function() {
+        const animLayer = document.getElementById('animationLayer'); // Re-grab to be sure
+        animLayer.innerHTML = ''; // Clear
+        const tplName = document.getElementById('templateSelect').value;
+        const target = document.getElementById('targetSelect').value;
+        const tpl = templates[tplName];
+        if (!tpl) return;
+
+        const sourceBox = document.getElementById('stage-source');
+        const lexerBox = document.getElementById('stage-lexer');
+        
+        // 1. Lexer: Source string explodes to tokens
+        sourceBox.innerText = tpl.code;
+        
+        const tokenEls = [];
+        for (let i = 0; i < tpl.tokens.length; i++) {
+            const token = tpl.tokens[i];
+            const el = createAnimElement(`[${token}]`, 'anim-token', sourceBox);
+            tokenEls.push(el);
+            
+            // Wait a bit, then move to Lexer
             setTimeout(() => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.style.opacity = '1';
-                    el.style.transform = 'scale(1.1)';
-                    setTimeout(() => el.style.transform = 'scale(1)', 200);
-                }
-            }, i * 500);
-        });
+                moveElementTo(el, lexerBox, (i - tpl.tokens.length/2) * 30, (i%2==0?-20:20));
+            }, 500 + i * 200);
+        }
+
+        // Call phase 2 after phase 1 finishes
+        setTimeout(() => {
+            if (typeof phase2Parser === 'function') {
+                phase2Parser(tokenEls, tpl, target);
+            }
+        }, 1000 + tpl.tokens.length * 200);
     };
 
     window.showDetails = function(type) {
+        const tplName = document.getElementById('templateSelect').value;
+        const currentTemplate = templates[tplName];
         if (!currentTemplate) {
             alert('Avval "Boshlash" tugmasini bosing!');
             return;
