@@ -1,0 +1,48 @@
+<!-- compiler_demo.html -->
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Compiler va Interpreter Demo</title>
+    <link rel="stylesheet" href="assets/main.css">
+    <link rel="stylesheet" href="assets/compiler_demo.css">
+</head>
+<body>
+    <header>
+        <h1>Tarjimon (Compiler/Interpreter) qanday ishlaydi?</h1>
+        <div class="controls">
+            <select id="templateSelect">
+                <option value="arithmetic">Arifmetik Ifoda</option>
+                <option value="error">Sintaktik Xato</option>
+            </select>
+            <button id="startBtn">Boshlash</button>
+        </div>
+    </header>
+
+    <main class="pipeline-container">
+        <div class="block" id="sourceBlock">Source Code</div>
+        <div class="block" id="lexerBlock" onclick="showDetails('lexer')">Lexer</div>
+        <div class="block" id="parserBlock" onclick="showDetails('parser')">Parser</div>
+        <div class="branch">
+            <div class="block" id="interpreterBlock">Interpreter</div>
+            <div class="block" id="compilerBlock">Compiler</div>
+        </div>
+    </main>
+
+    <div id="detailsModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalTitle">Detallar</h2>
+            <pre id="modalBody"></pre>
+            <button onclick="document.getElementById('detailsModal').classList.add('hidden')">Yopish</button>
+        </div>
+    </div>
+
+    <script src="assets/compiler_demo.js"></script>
+    <script>
+        document.getElementById('startBtn').addEventListener('click', () => {
+            const tplName = document.getElementById('templateSelect').value;
+            window.startPipeline(tplName);
+        });
+    </script>
+</body>
+</html>
