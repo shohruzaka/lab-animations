@@ -1,0 +1,84 @@
+/* assets/compiler_demo.css */
+.pipeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    margin-top: 20px;
+    width: 80%;
+    max-width: 800px;
+}
+
+.block {
+    padding: 15px 30px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    font-weight: bold;
+    min-width: 150px;
+    text-align: center;
+}
+
+.block:hover {
+    transform: scale(1.05);
+    background: var(--secondary);
+}
+
+.branch {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--bg);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--primary);
+    max-width: 500px;
+    width: 90%;
+}
+
+pre {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    color: #38bdf8;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+button:hover {
+    background: var(--secondary);
+}
