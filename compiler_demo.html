@@ -23,6 +23,9 @@
         <div class="controls">
             <select id="templateSelect">
                 <option value="arithmetic">Arifmetik: x = 5 + 3;</option>
+                <option value="simple">Oddiy: y = 10;</option>
+                <option value="complex">Murakkab: z = (1 + 2) * 3;</option>
+                <option value="error">Xatolik: 5 = x;</option>
             </select>
             <select id="targetSelect">
                 <option value="compiler">Kompilyator (Compiler)</option>
@@ -35,8 +38,8 @@
     <main class="pipeline-v2" id="pipelineArea">
         <div class="stage-container">
             <div class="stage-box" id="stage-source">Source Code</div>
-            <div class="stage-box" id="stage-lexer">Lexical Analyzer</div>
-            <div class="stage-box" id="stage-parser">Syntax Analyzer</div>
+            <div class="stage-box" id="stage-lexer" onclick="showDetails('lexer')" style="cursor: pointer;">Lexical Analyzer</div>
+            <div class="stage-box" id="stage-parser" onclick="showDetails('parser')" style="cursor: pointer;">Syntax Analyzer</div>
             <div class="stage-box" id="stage-target">Target (Compiler/Interpreter)</div>
             <div class="stage-box" id="stage-output">Output / Result</div>
         </div>

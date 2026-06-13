@@ -3,12 +3,14 @@ const templates = {
     arithmetic: {
         code: 'x = 5 + 3;',
         tokens: ['x', '=', '5', '+', '3', ';'],
-        ast: { type: 'Assignment', left: 'x', right: { type: 'BinaryExpression', operator: '+', left: '5', right: '3' } }
+        ast: { type: 'Assignment', left: 'x', right: { type: 'BinaryExpression', operator: '+', left: '5', right: '3' } },
+        result: 'x = 8'
     },
     simple: {
         code: 'y = 10;',
         tokens: ['y', '=', '10', ';'],
-        ast: { type: 'Assignment', left: 'y', right: '10' }
+        ast: { type: 'Assignment', left: 'y', right: '10' },
+        result: 'y = 10'
     },
     complex: {
         code: 'z = (1 + 2) * 3;',
@@ -22,13 +24,15 @@ const templates = {
                 left: { type: 'BinaryExpression', operator: '+', left: '1', right: '2' }, 
                 right: '3' 
             } 
-        }
+        },
+        result: 'z = 9'
     },
     error: {
         code: '5 = x;',
         tokens: ['5', '=', 'x', ';'],
         ast: null,
-        error: 'SyntaxError: Invalid left-hand side in assignment'
+        error: 'SyntaxError: Invalid left-hand side in assignment',
+        result: 'Error'
     }
 };
 
@@ -199,12 +203,12 @@ if (typeof window !== 'undefined') {
                     }, i*150);
                 }
             } else {
-                outputBox.innerText = 'Memory: x = 8';
+                outputBox.innerText = 'Memory: ' + (tpl.result || 'Result');
                 outputBox.style.background = '#7c3aed'; // Purple memory
                 outputBox.style.color = 'white';
                 
                 // Single bytecode / result token moving
-                const evalEl = createAnimElement('eval(5+3)', 'anim-token', targetBox);
+                const evalEl = createAnimElement('eval(...)', 'anim-token', targetBox);
                 evalEl.style.background = '#7c3aed';
                 evalEl.style.color = 'white';
                 
