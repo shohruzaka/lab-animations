@@ -82,3 +82,73 @@ button {
 button:hover {
     background: var(--secondary);
 }
+
+/* Pipeline V2 Styles */
+.pipeline-v2 {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    background: #1e1e2f;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.stage-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 400px;
+}
+
+.stage-box {
+    width: 150px;
+    height: 150px;
+    background: #2a2a40;
+    border: 2px dashed #4a4a6a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+#animationLayer {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.anim-token {
+    position: absolute;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 1s ease-in-out;
+    background: #eab308; /* Yellow for tokens */
+    color: #000;
+}
+
+.anim-ast-node {
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    background: #3b82f6; /* Blue for AST nodes */
+    color: white;
+    font-family: monospace;
+    transition: all 1s ease-in-out;
+}
+
+.anim-binary {
+    position: absolute;
+    color: #10b981; /* Green for 0101 */
+    font-family: monospace;
+    transition: all 1s linear;
+}
